@@ -85,4 +85,11 @@ SENAR tables, and skill/role sections.
 ## Current State
 Session: none | Branch: master | TAUSIK: 1.11.7
 Tasks: 1/1 done, 0 active, 0 blocked
+
+### Memory tail
+
+**Shared knowledge — from other projects (3):**
+- [gotcha] gigacode-write-tool-limit
+- [gotcha] write-limit-10kb-workaround
+- [gotcha] write-limit-10kb
 <!-- DYNAMIC:END -->
