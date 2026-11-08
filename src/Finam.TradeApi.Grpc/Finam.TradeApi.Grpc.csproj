@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <Description>gRPC-клиент Finam Trade API, сгенерированный из официальных protobuf-схем Finam (https://api.finam.ru/docs/grpc/).</Description>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.28.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.67.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.67.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Сервисные протоколы Finam Trade API: генерируем gRPC-клиент -->
+    <Protobuf Include="proto/grpc/tradeapi/v1/**/*.proto" ProtoRoot="proto" GrpcServices="Client" />
+    <!-- Зависимости (google.api, google.type, grpc.gateway): только типы -->
+    <Protobuf Include="proto/google/api/annotations.proto" ProtoRoot="proto" GrpcServices="None" />
+    <Protobuf Include="proto/google/api/http.proto" ProtoRoot="proto" GrpcServices="None" />
+    <Protobuf Include="proto/google/type/*.proto" ProtoRoot="proto" GrpcServices="None" />
+    <Protobuf Include="proto/grpc/gateway/protoc_gen_openapiv2/options/*.proto" ProtoRoot="proto" GrpcServices="None" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/FinamClient.Samples/FinamClient.Samples.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Finam.TradeApi.Grpc/Finam.TradeApi.Grpc.csproj" />
+    <Project Path="src/FinamClient/FinamClient.csproj" />
+  </Folder>
+</Solution>
