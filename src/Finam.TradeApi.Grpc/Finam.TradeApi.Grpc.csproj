@@ -7,7 +7,19 @@
     <LangVersion>latest</LangVersion>
     <Description>gRPC-клиент Finam Trade API, сгенерированный из официальных protobuf-схем Finam (https://api.finam.ru/docs/grpc/).</Description>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <PackageId>Finam.TradeApi.Grpc</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>FinamClient Team</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Kibertum/FinamClient</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Kibertum/FinamClient</PackageProjectUrl>
+    <PackageTags>finam;trade;grpc;api</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.28.3" />

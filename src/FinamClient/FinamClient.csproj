@@ -6,10 +6,22 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <Description>Высокоуровневая C#-обёртка над Finam Trade API (gRPC) для проектов автоматической торговли.</Description>
+    <PackageId>FinamClient</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>FinamClient Team</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Kibertum/FinamClient</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Kibertum/FinamClient</PackageProjectUrl>
+    <PackageTags>finam;trade;api;automation</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Finam.TradeApi.Grpc\Finam.TradeApi.Grpc.csproj" />
+    <PackageReference Include="Finam.TradeApi.Grpc" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
