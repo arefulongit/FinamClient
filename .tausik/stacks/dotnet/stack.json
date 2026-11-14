@@ -1,0 +1,67 @@
+{
+  "name": "dotnet",
+  "version": "1",
+  "extends": "builtin:python",
+  "detect": [
+    {
+      "file": "*.slnx",
+      "type": "glob"
+    },
+    {
+      "file": "*.sln",
+      "type": "glob"
+    },
+    {
+      "file": "*.csproj",
+      "type": "glob"
+    }
+  ],
+  "extensions": [
+    ".cs",
+    ".csproj",
+    ".slnx",
+    ".sln",
+    ".props",
+    ".targets"
+  ],
+  "gates": {
+    "dotnet-build": {
+      "enabled": true,
+      "severity": "block",
+      "trigger": [
+        "verify",
+        "commit"
+      ],
+      "command": "dotnet build FinamClient.slnx -c Release --nologo -v q 2>&1 | tail -25",
+      "file_extensions": [
+        ".cs",
+        ".csproj",
+        ".slnx",
+        ".sln",
+        ".props",
+        ".targets"
+      ],
+      "description": "Сборка решения .NET в Release — ловит ошибки компиляции и восстановления",
+      "stacks": [
+        "dotnet"
+      ],
+      "timeout": 420
+    },
+    "dotnet-test": {
+      "enabled": false,
+      "severity": "block",
+      "trigger": [
+        "verify"
+      ],
+      "command": "dotnet test FinamClient.slnx -c Release --nologo -v q 2>&1 | tail -30",
+      "file_extensions": [
+        ".cs"
+      ],
+      "description": "Тесты .NET; выключен, пока в решении нет тестовых проектов",
+      "stacks": [
+        "dotnet"
+      ],
+      "timeout": 600
+    }
+  }
+}

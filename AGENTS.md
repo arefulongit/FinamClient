@@ -2,9 +2,9 @@
 
 You are an AI agent working on this project.
 
-## Project: my-project
+## Project: FinamClient
 
-Stack: not detected
+Stack: dotnet
 Framework: [TAUSIK](https://github.com/Kibertum/tausik-core) — AI agent governance implementing [SENAR v1.5](https://senar.tech)
 
 **WHETHER THE RULES BELOW ARE ENFORCED DEPENDS ON THE HOST READING THIS FILE.** This file is host-agnostic, so it cannot answer that; `.tausik/tausik doctor` prints the coverage measured on disk per host. On a host where TAUSIK deployed no real-time mechanism, everything below is instructions, not checks: the gates still exist in the CLI (`.tausik/tausik verify`, `task done`) and you reach them by running them.
@@ -24,6 +24,18 @@ Framework: [TAUSIK](https://github.com/Kibertum/tausik-core) — AI agent govern
 - **Document dead ends.** Run `.tausik/tausik dead-end "approach" "reason"` on failed approaches. (SENAR Rule 9.4)
 - **Checkpoint when the signal says so.** The count of calls since the last handoff is derived from the ledger and advised in tool responses. (SENAR Rule 9.3)
 - **Context pressure is a signal, not a gate.** Session time and call capacity advise a `/checkpoint` or a handoff; they never refuse a task start (decision #376; basis: `docs/en/session-active-time.md`, SENAR 1.5 §9.4(c)).
+
+## Lifecycle prohibitions (non-negotiable)
+
+Each item below is a failure mode that already produced a false `done` in this repository. On hosts where TAUSIK deployed a profile (`.qwen/`, `.claude/`) a hook refuses the action; everywhere else `verify` and `task done` refuse it.
+
+1. **Never edit a task status by hand.** `tasks/<TASK>/task.md` is a projection: `Status`, `Closed` and `TAUSIK` are written by `task start` / `task done` only. A markdown edit is not a closure — it leaves the task active in the DB.
+2. **`--no-file-changes` only when git proves no edits.** If the task touched files, close with `task done <slug> --verify --ac-verified`. Committing before `verify` hides the scope from the git check and turns that flag into a lie.
+3. **Never commit before a green verify.** Order: `verify --task <slug>` → `git commit` → `tausik push-ok` → `git push`.
+4. **AC evidence enumerates every criterion** from `task.md`, by number. "AC verified" for 6 of 8 criteria is not evidence.
+5. **A red blocking gate is fixed, not explained.** `dead-end` records document an approach; they never authorise closing over `FAIL`.
+6. **Done means committed.** A closed task whose files are untracked or modified is not done: `tasks/`, `README.md` and package metadata are part of the deliverable.
+7. **One task, one scope.** Work outside `scope_paths` starts a new task instead of widening the current one.
 
 ## Workflow (minimal tier)
 
@@ -84,12 +96,13 @@ SENAR tables, and skill/role sections.
 <!-- DYNAMIC:START -->
 ## Current State
 Session: none | Branch: master | TAUSIK: 1.11.7
-Tasks: 1/1 done, 0 active, 0 blocked
+Tasks: 3/3 done, 0 active, 0 blocked
 
 ### Memory tail
-
-**Shared knowledge — from other projects (3):**
-- [gotcha] gigacode-write-tool-limit
-- [gotcha] write-limit-10kb-workaround
-- [gotcha] write-limit-10kb
+Context (1):
+- #1 agent-identity
+Dead ends (3):
+- #7 Прогон verify сразу после ручного redeploy профилей
+- #6 Закрывать задачу с изменениями через task done --no-file-changes
+- #5 Править Status/Closed в tasks/TASK-001/task.md вручную
 <!-- DYNAMIC:END -->

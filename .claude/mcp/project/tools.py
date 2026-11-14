@@ -10,6 +10,7 @@ _STACKS_ENUM = [
     "blade",
     "django",
     "docker",
+    "dotnet",
     "fastapi",
     "flask",
     "flutter",

@@ -86,6 +86,28 @@ await foreach (var q in quotes)
 
 Схемы лежат в [`src/Finam.TradeApi.Grpc/proto/`](src/Finam.TradeApi.Grpc/proto). При обновлении API Финамом заново скопируйте каталог `proto/` из [FinamWeb/finam-trade-api](https://github.com/FinamWeb/finam-trade-api) — C#-код перегенерируется автоматически при сборке ([`Grpc.Tools`](src/Finam.TradeApi.Grpc/Finam.TradeApi.Grpc.csproj:15)).
 
+## Сборка NuGet-пакета
+
+```bash
+# Сборка пакетов
+dotnet pack FinamClient.slnx -c Release
+
+# Публикация в локальный фид
+dotnet nuget push src/Finam.TradeApi.Grpc/bin/Release/Finam.TradeApi.Grpc.*.nupkg --source local --api-key "not-needed"
+dotnet nuget push src/FinamClient/bin/Release/FinamClient.*.nupkg --source local --api-key "not-needed"
+```
+
+Пакеты создаются в `src/*/bin/Release/`. Локальный фид находится в каталоге `nuget/local/`.
+
+## Подключение через NuGet
+
+```bash
+# Установка FinamClient (автоматически подтянет Finam.TradeApi.Grpc)
+dotnet add path/to/YourProject.csproj package FinamClient --version 1.0.0
+```
+
+Пакет `FinamClient` содержит транзитивную зависимость от `Finam.TradeApi.Grpc` — устанавливать второй пакет отдельно не нужно.
+
 ## Безопасность
 
 - Не храните API-токен в коде: используйте переменные окружения (`FINAM_API_SECRET`), user-secrets или `*.secret.json` (в [.gitignore](.gitignore)).

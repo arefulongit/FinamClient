@@ -1,10 +1,10 @@
-# CLAUDE.md <!-- TAUSIK:GENERATED-SHA256:7061eb7b282cdef1c4528531cea1fc4b0aa4696175fc7aeb3df6c913a8b70935 -->
+# CLAUDE.md <!-- TAUSIK:GENERATED-SHA256:035a12ad0886365671aa0e4f5695b0a45792f3613d3adbdb516e6e315d513c97 -->
 
 You are an AI agent (Claude Code) working on this project.
 
 ## Project: my-project
 
-Stack: not detected
+Stack: dotnet
 Framework: [TAUSIK](https://github.com/Kibertum/tausik-core) — AI agent governance implementing [SENAR v1.5](https://senar.tech)
 
 Quality gates enforce these automatically: bootstrap deployed 37 hook commands into this host's profile, so a violation is refused rather than reported.
@@ -84,9 +84,15 @@ SENAR tables, and skill/role sections.
 <!-- DYNAMIC:START -->
 ## Current State
 Session: none | Branch: master | TAUSIK: 1.11.7
-Tasks: 0/0 done, 0 active, 0 blocked
+Tasks: 3/3 done, 0 active, 0 blocked
 
 ### Memory tail
+Context (1):
+- #1 agent-identity
+Dead ends (3):
+- #7 Прогон verify сразу после ручного redeploy профилей
+- #6 Закрывать задачу с изменениями через task done --no-file-changes
+- #5 Править Status/Closed в tasks/TASK-001/task.md вручную
 
 **Shared knowledge — from other projects (3):**
 - [gotcha] gigacode-write-tool-limit

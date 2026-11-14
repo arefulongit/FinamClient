@@ -1,0 +1,395 @@
+{
+  "mcpServers": {
+    "codebase-rag": {
+      "type": "stdio",
+      "command": "/app/work/user/FinamClient/.tausik/venv/bin/python3",
+      "args": [
+        "/app/work/user/FinamClient/.qwen/mcp/codebase-rag/rag_server.py",
+        "--project",
+        "/app/work/user/FinamClient"
+      ]
+    },
+    "tausik-project": {
+      "type": "stdio",
+      "command": "/app/work/user/FinamClient/.tausik/venv/bin/python3",
+      "args": [
+        "/app/work/user/FinamClient/.qwen/mcp/project/server.py",
+        "--project",
+        "/app/work/user/FinamClient"
+      ]
+    }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/task_gate.py",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/scope_write_gate.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/read_ledger_gate.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/memory_pretool_block.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/secret_scan.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/bash_firewall.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/bash_write_gate.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/git_push_gate.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__FileSystem|mcp__serena__replace_symbol_body|mcp__serena__replace_content|mcp__serena__insert_after_symbol|mcp__serena__insert_before_symbol|mcp__serena__rename_symbol|mcp__serena__safe_delete_symbol",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/task_gate.py",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__FileSystem|mcp__serena__replace_symbol_body|mcp__serena__replace_content|mcp__serena__insert_after_symbol|mcp__serena__insert_before_symbol|mcp__serena__rename_symbol|mcp__serena__safe_delete_symbol",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/scope_write_gate.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__FileSystem|mcp__serena__replace_symbol_body|mcp__serena__replace_content|mcp__serena__insert_after_symbol|mcp__serena__insert_before_symbol|mcp__serena__rename_symbol|mcp__serena__safe_delete_symbol|mcp__windows-mcp__PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/memory_pretool_block.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__FileSystem|mcp__serena__replace_symbol_body|mcp__serena__replace_content|mcp__serena__insert_after_symbol|mcp__serena__insert_before_symbol|mcp__serena__rename_symbol|mcp__serena__safe_delete_symbol|mcp__windows-mcp__PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/secret_scan.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/bash_firewall.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/bash_write_gate.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/git_push_gate.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/tool_choice_nudge.py",
+            "timeout": 6
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/auto_format.py",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/memory_posttool_audit.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__tausik-project__tausik_task_done",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/task_done_verify.py",
+            "timeout": 6
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/task_done_verify.py",
+            "timeout": 6
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/task_call_counter.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/posttool_usage.py",
+            "timeout": 4
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell|Read|Grep|Glob|WebFetch|WebSearch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/activity_event.py",
+            "timeout": 2
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Grep|Glob|Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/tool_output_truncation_nudge.py",
+            "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/rag_grep_context.py",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/task_cost_budget_check.py",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/tool_choice_nudge.py",
+            "timeout": 6
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__FileSystem|mcp__serena__replace_symbol_body|mcp__serena__replace_content|mcp__serena__insert_after_symbol|mcp__serena__insert_before_symbol|mcp__serena__rename_symbol|mcp__serena__safe_delete_symbol",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/auto_format.py",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__FileSystem|mcp__serena__replace_symbol_body|mcp__serena__replace_content|mcp__serena__insert_after_symbol|mcp__serena__insert_before_symbol|mcp__serena__rename_symbol|mcp__serena__safe_delete_symbol",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/memory_posttool_audit.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__FileSystem|mcp__serena__replace_symbol_body|mcp__serena__replace_content|mcp__serena__insert_after_symbol|mcp__serena__insert_before_symbol|mcp__serena__rename_symbol|mcp__serena__safe_delete_symbol|mcp__windows-mcp__PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/task_call_counter.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__FileSystem|mcp__serena__replace_symbol_body|mcp__serena__replace_content|mcp__serena__insert_after_symbol|mcp__serena__insert_before_symbol|mcp__serena__rename_symbol|mcp__serena__safe_delete_symbol|mcp__windows-mcp__PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/activity_event.py",
+            "timeout": 2
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__windows-mcp__PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/tool_output_truncation_nudge.py",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/session_start.py",
+            "timeout": 6
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/user_prompt_submit.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/keyword_detector.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/session_cleanup_check.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /app/work/user/FinamClient/.qwen/scripts/hooks/session_metrics.py --auto --record 2>&1 || true"
+          }
+        ]
+      }
+    ]
+  }
+}

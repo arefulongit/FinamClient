@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Finam.TradeApi.Grpc" Version="1.0.0" />
+    <ProjectReference Include="..\Finam.TradeApi.Grpc\Finam.TradeApi.Grpc.csproj" />
   </ItemGroup>
 
   <ItemGroup>

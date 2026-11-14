@@ -1,10 +1,10 @@
 # TASK-001: Создание удалённого репозитория на GitHub
 
-- **Status**: [` `]  [`open`]
+- **Status**: [`x`]  [`done`]
 - **Opened**: 2026-11-08
-- **Closed**: YYYY-MM-DD
+- **Closed**: 2026-11-08
 - **Related**: 
-- **TAUSIK**: 
+- **TAUSIK**: task-001
 
 ## Краткое описание задачи
 

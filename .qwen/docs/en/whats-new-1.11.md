@@ -1,0 +1,153 @@
+**English** | [Русский](../ru/whats-new-1.11.md)
+
+# TAUSIK 1.11: less context, fewer rounds, the same evidence
+
+<!-- doc-map: reader=user; zone=release-notes -->
+
+TAUSIK 1.11 targets the cost of accepted work in Codex. It reduces repeated
+framework context and avoids deterministic model returns without weakening QG-0,
+QG-2, verification evidence or fail-open behaviour.
+
+## Measured changes
+
+| Surface | 1.11 result |
+|---|---:|
+| Repeated MCP prefix, same 147 tools | 63,333 → 42,519 bytes (**−32.9%**) |
+| Two reviewed low-value test groups | 87 → 45 nodes (**−48.3%**) |
+| Codex cache share in the observed baseline | **97.8%** |
+| Default quality lane, public snapshot | 12,559 passed · 100 skipped · 143 deselected |
+| Slow quality lane, public snapshot | 129 passed · 14 skipped · 12,659 deselected |
+
+The high cache share means the next useful levers are fewer model rounds and
+economical routing, not more blind context deletion.
+
+## What changed
+
+- `/start` is one bounded call. `task start` can return its package, and
+  `task show --package` is the normal bounded retrieval path.
+- Ordinary verify selects affected tests. Ambiguous, unmapped or sensitive
+  changes fail open to the complete applicable lane.
+- Verify output is compact, but full logs and machine counts stay under
+  `.tausik/verification/`.
+- Codex and Kilo usage are read from native local records without storing
+  conversation content or double-counting cache/reasoning subsets.
+- Routing can choose an economical bounded worker and escalate for named risk;
+  it never claims to switch the active coordinator.
+- User-facing answers default to controlled prose and use tables or diagrams
+  only when they materially reduce reading effort.
+
+## Honest limits
+
+This release does **not** claim that every project will use 30% fewer weekly
+Codex credits. Natural accepted-task rounds have not yet met the release target,
+Luna is not yet qualified as the routine default, and one verification replay
+still loses preflight evidence. Those measurements continue on the 1.11.x line.
+
+## Attribution
+
+The 1.11 work was developed by Andrey Yumashev with OpenAI Codex. Release commits
+carry `Co-authored-by: Codex <codex@openai.com>` so GitHub attributes Codex as a
+contributor.
+
+See the [full changelog](../../CHANGELOG.md) and the
+[Russian release notes](../ru/whats-new-1.11.md).
+
+GitHub Release links:
+
+- [English notes](https://github.com/Kibertum/tausik-core/blob/v1.11.2/docs/en/whats-new-1.11.md)
+- [Russian notes](https://github.com/Kibertum/tausik-core/blob/v1.11.2/docs/ru/whats-new-1.11.md)
+
+## 1.11.3 — verification economy measured, Kilo completed
+
+Pooled verification end to end (`verify --tasks` / `--story` / `--epic`, the
+cohort contract, a live 34→1 verify-execution proof); the economy claim is
+measured: repeated-prefix −30.65%, natural response-round median 17/25 against
+a baseline of 89 (verification-cycle savings not claimed, by refusal). Kilo is
+a fully governed host — the `permission` surface is used and vendor agents are
+normalized at the deploy boundary. The framework reads itself: `doctor
+--harness-audit`, `doctor --friction`, a blocked task carries its question,
+the memory tail selects by significance.
+
+- [Exact 1.11.3 changelog](https://github.com/Kibertum/tausik-core/blob/v1.11.3/CHANGELOG.md)
+- [English notes](https://github.com/Kibertum/tausik-core/blob/v1.11.3/docs/en/whats-new-1.11.md)
+- [Russian notes](https://github.com/Kibertum/tausik-core/blob/v1.11.3/docs/ru/whats-new-1.11.md)
+
+## 1.11.4 — security proof and publication containment
+
+Security-sensitive verification remains non-replayable, but a successful run
+can now close its task exactly once through a signed handle that is rechecked
+against the live files and gate configuration. Verification identity and its
+replay/presentation rights are structured data, not command-text conventions.
+
+The release line is safer as well: tags wait for CI on the exact public SHA,
+publication verifies the complete reachable history, recovery produces a
+parentless snapshot, and anonymous remote audit fails closed. The authorized
+1.11.3 containment moved GitHub `main` and `v1.11.3` to parentless snapshot
+`3dd6f5d`, deleted `v1-11-3`, and audited all 16 advertised refs; none reaches
+the contaminated commits. A stricter affected-test map, durable
+comment-reference evidence, complete gate signatures, and idempotent local
+friction tasks close the other framework-review findings.
+
+- [Exact 1.11.4 changelog](https://github.com/Kibertum/tausik-core/blob/v1.11.4/CHANGELOG.md)
+- [English notes](https://github.com/Kibertum/tausik-core/blob/v1.11.4/docs/en/whats-new-1.11.md)
+- [Russian notes](https://github.com/Kibertum/tausik-core/blob/v1.11.4/docs/ru/whats-new-1.11.md)
+
+## 1.11.5 — bounded L3 review
+
+Automatic normal-L3 review now has a hard work budget: one full cohort round
+and at most one delta round for red or affected tasks. Unchanged green tasks
+carry forward. If round 2 remains red, TAUSIK stops and asks for one explicit
+owner decision; it does not schedule round 3. CRITICAL findings and configured
+hard floors remain non-waivable, while a human can still request
+`/review --deep` outside the automatic budget.
+
+The 1/2/5-task acceptance scenario reduces reviewer calls from 2/4/10 to
+2/2/2 and avoids 0/1/4 green re-reviews. These are protocol counts, not claimed
+historical token savings; reviewer latency and tokens were unavailable.
+
+Each verdict now names the exact immutable packet it reviewed. The packet
+contains numbered AC evidence and trusted author/dependency provenance; CLI and
+MCP reject malformed payloads identically. Accepted risk stays visible as its
+own status and never appears as an ordinary green result.
+
+- [Bounded L3 contract](review-cohort-contract.md)
+- [Exact 1.11.5 changelog](https://github.com/Kibertum/tausik-core/blob/v1.11.5/CHANGELOG.md)
+
+## 1.11.6 — one model family per environment
+
+SENAR Rule 4 no longer requires the L3 reviewer to run on a different model
+family. Separation of duties holds by the isolated, mechanically read-only
+reviewer context: the reviewer runs on the SAME model family as the author —
+the model the host already runs. A Claude host reviews with Claude only,
+Codex with GPT only, z.ai with GLM only; pulling another family for review
+is prohibited, and an L3 record with a cross-family reviewer is refused.
+Same-family records (including the author's own model) are the recordable
+form, and both model identities stay mandatory.
+
+The pre-1.11.6 `different-model` context token remains readable, so
+historical review records stay valid; new rounds record `external`, and
+schema v81 widens the cohort-round CHECK by a guarded table rebuild. The
+external-reviewer subagent drops its hardcoded model and blocks a delegation
+asking for another family. Also fixed: the bounded task-context package
+could return a few bytes over its budget when the omission marker itself
+crossed the ceiling.
+
+- [SENAR rules](senar.md)
+- [Exact 1.11.6 changelog](https://github.com/Kibertum/tausik-core/blob/v1.11.6/CHANGELOG.md)
+
+## 1.11.7 — memory-only Cursor playbook and task rename
+
+memory-only keeps a light backlog (canon B): epic/story/task stay as
+work accounting while session/verify/QG walls stay off the default path
+unless the owner asks for `full_path`. Bootstrap deploys `tausik-memory`;
+`tausik_memory_brief` returns the playbook in one call. `tools/list`
+annotates disabled profile tools. Cursor economy is documented as rounds
++ surface (multi-project), not cache polish; Codex numbers are not
+relabeled as Cursor.
+
+`task rename` / `tausik_task_rename` move a published slug with every
+referring column in one transaction (schema-derived referrers,
+`foreign_key_check`, projection cleanup). The release CI gate stays
+minutes: Windows is nightly, not per-push.
+
+- [Exact 1.11.7 changelog](https://github.com/Kibertum/tausik-core/blob/v1.11.7/CHANGELOG.md)
